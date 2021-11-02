@@ -46,8 +46,12 @@ function App() {
                 />
                 <Footer />
 
-                <PopupWithForm title="Редактировать профиль" name="edit-profile" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} >
-                    <>
+                <PopupWithForm 
+                title="Редактировать профиль" 
+                name="edit-profile" 
+                isOpen={isEditProfilePopupOpen} 
+                onClose={closeAllPopups} 
+                buttonText="Сохранить" >
                         <div className="popup__section">
                             <input id="name-input" name="name" className="popup__input popup__input_type_name" type="text" placeholder="Имя" required minLength="2" maxLength="40" />
                             <span className="popup__input-error name-input-error"></span>
@@ -57,15 +61,14 @@ function App() {
                             <input id="description-input" name="about" className="popup__input popup__input_type_description" type="text" placeholder="Описание" required minLength="2" maxLength="200" />
                             <span className="popup__input-error description-input-error"></span>
                         </div>
-                    </>
                 </PopupWithForm>
 
                 <PopupWithForm 
                 title="Новое место" 
                 name="create-place" 
-                isOpen={isAddPlacePopupOpen} 
-                onClose={closeAllPopups} >
-                    <>
+                isOpen={isAddPlacePopupOpen}
+                onClose={closeAllPopups} 
+                buttonText="Создать">
                         <div className="popup__section">
                             <input id="place-name-input" name="name" className="popup__input popup__input_type_name" type="text" placeholder="Название" required minLength="2" maxLength="30" />
                             <span className="popup__input-error place-name-input-error"></span>
@@ -75,26 +78,25 @@ function App() {
                             <input id="link-input" name="link" className="popup__input popup__input_type_description" type="url" placeholder="Ссылка на картинку" required />
                             <span className="popup__input-error link-input-error"></span>
                         </div>
-                    </>
                 </PopupWithForm>
 
                 <PopupWithForm 
                 title="Обновить аватар" 
                 name="change-avatar" 
                 isOpen={isEditAvatarPopupOpen}
-                onClose={closeAllPopups} >
-                    <>
+                onClose={closeAllPopups} 
+                buttonText="Сохранить">
                         <div className="popup__section">
                             <input id="avatar-link-input" name="link" className="popup__input popup__input_type_description" type="url" placeholder="Ссылка на картинку" required />
                             <span className="popup__input-error avatar-link-input-error"></span>
                         </div>
-                    </>
                 </PopupWithForm>
 
                 <PopupWithForm 
                 title="Вы уверены?"
                 name="delete-confirm"
-                isOpen={false} />
+                isOpen={false} 
+                buttonText="Да"/>
 
                 <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 

@@ -32,7 +32,7 @@ function Main(props) {
         .catch(err => {
             console.error(err);
         });
-    }, [props.onCardClick]);
+    }, []);
             
     return(
         <main>
