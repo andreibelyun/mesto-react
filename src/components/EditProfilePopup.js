@@ -6,8 +6,8 @@ export default function EditProfilePopup(props) {
 
     const currentUser = useContext(CurrentUserContext);
 
-    const [name, setName] = useState();
-    const [description, setDescription] = useState();
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
 
     const handleChangeName = (e) => {
         setName(e.target.value);
@@ -42,7 +42,7 @@ export default function EditProfilePopup(props) {
         >
             <div className="popup__section">
                 <input
-                    value={name}
+                    value={name ? name : ""}
                     onChange={handleChangeName}
                     id="name-input" 
                     name="name" 
@@ -57,7 +57,7 @@ export default function EditProfilePopup(props) {
 
             <div className="popup__section">
                 <input
-                    value={description}
+                    value={description ? description : ""}
                     onChange = {handleChangeDescription}
                     id="description-input" 
                     name="about" 
