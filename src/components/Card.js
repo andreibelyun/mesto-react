@@ -1,29 +1,55 @@
-// Считаю, было бы хорошим опытом поработать не только с функциональными компонентами.
-// Кто знает какие проекты придётся поддерживать в реальной работе.
-// А state, думаю, здесь в скором времени появится.
 import React from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
-class Card extends React.Component {
+function Card(props) {
+    
+    const currentUser = React.useContext(CurrentUserContext);
 
-    handleClick = () => {
-        this.props.onCardClick(this.props.card);
-    }
+    const isOwn = props.card.owner._id === currentUser._id;
+    const cardDeleteButtonClassName = (`card__remove ${isOwn ? 'card__remove_active' : ''}`);
+    const isLiked = props.card.likes.some(item => item._id === currentUser._id);
+    const cardLikeButtonClassName = (`card__like ${isLiked ? 'card__like_active' : ''}`);
 
-    render() {
-        return (
-            <article className="card">
-                <img className="card__photo" src={this.props.card.link} alt={this.props.card.name} onClick={this.handleClick}/>
-                <button className="card__remove" type="button" aria-label="Удалить карточку"></button>
-                <div className="card__info">
-                    <h2 className="card__title">{this.props.card.name}</h2>
-                    <div className="card__like-group">
-                        <button className="card__like" type="button" aria-label="Поставить лайк"></button>
-                        <p className="card__likes-count">{this.props.card.likes.length}</p>
-                    </div>
-                </div> 
-            </article>
-        );
-    }
+    const handleClick = () => {
+        props.onCardClick(props.card);
+    };
+        
+    const handleLikeClick = () => {
+        props.onCardLike(props.card);
+    };
+
+    const handleDeleteClick = () => {
+        props.onCardDelete(props.card);
+    };
+
+    return (
+        <article className="card">
+            <img 
+                className="card__photo" 
+                src={props.card.link} 
+                alt={props.card.name} 
+                onClick={handleClick}
+            />
+            <button 
+                className={cardDeleteButtonClassName} 
+                type="button" 
+                aria-label="Удалить карточку" 
+                onClick={handleDeleteClick} 
+            />
+            <div className="card__info">
+                <h2 className="card__title">{props.card.name}</h2>
+                <div className="card__like-group">
+                    <button 
+                        className={cardLikeButtonClassName} 
+                        type="button" 
+                        aria-label="Поставить лайк" 
+                        onClick={handleLikeClick}
+                    />   
+                    <p className="card__likes-count">{props.card.likes.length}</p>
+                </div>
+            </div> 
+        </article>
+    );
 }
 
 export default Card;
